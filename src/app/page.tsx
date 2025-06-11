@@ -1,25 +1,4 @@
-import { ToolCard } from "@/components/ToolCard"
-import { Target, Video, Users } from "lucide-react"
-
 export default function HomePage() {
-  const tools = [
-    {
-      icon: Target,
-      title: "Сформулировать цель",
-      description: "Преврати размытую идею в чёткую цель с помощью AI-ассистента"
-    },
-    {
-      icon: Video,
-      title: "Извлечь пользу из видео",
-      description: "Получи ключевые инсайты и конспект из любого видео или подкаста"
-    },
-    {
-      icon: Users,
-      title: "Провести утреннюю планёрку",
-      description: "Эффективно организуй командную работу с помощью AI-фасилитатора"
-    }
-  ]
-
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-16">
