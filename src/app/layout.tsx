@@ -4,8 +4,8 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin', 'cyrillic'] })
 
 export const metadata = {
-  title: 'bipch — AI-инструменты для предпринимателей',
-  description: 'Платформа с практическими AI-инструментами для целей, команд и решений',
+  title: 'AI-инструменты для Руководителя | BIPch.ai',
+  description: 'Платформа с практическими AI-решениями для управления командой, принятия решений и достижения бизнес-целей',
 }
 
 export default function RootLayout({
