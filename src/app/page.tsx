@@ -1,3 +1,7 @@
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { ArrowRight } from 'lucide-react'
+
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
@@ -12,10 +16,17 @@ export default function HomePage() {
           </p>
         </div>
         
-        <div className="text-center">
-          <p className="text-muted-foreground">
-            Платформа в разработке. Скоро здесь появятся мощные инструменты для руководителей.
+        <div className="text-center space-y-6">
+          <p className="text-muted-foreground text-lg">
+            Откройте для себя проверенную коллекцию AI-инструментов с информацией о доступности из России
           </p>
+          
+          <Button asChild size="lg" className="text-lg px-8 py-6">
+            <Link href="/ai-box-tools" className="flex items-center gap-2">
+              Посмотреть AI-инструменты
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </Button>
         </div>
       </div>
     </div>
