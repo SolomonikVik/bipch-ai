@@ -1,0 +1,44 @@
+{
+  "mentors": [
+    {
+      "id": "steve-jobs",
+      "name": "Стив Джобс",
+      "status": "active",
+      "avatar": "/images/mentors/steve-jobs.jpg",
+      "tagline": "Think Different",
+      "focus": "Инновации и эмоциональный продукт",
+      "triggers": ["продукт не выделяется", "конкуренты обгоняют", "застой идей"],
+      "style": "Провокационные вопросы, радикальный фокус",
+      "description": "Поможет найти уникальность продукта и отсечь лишнее"
+    },
+    {
+      "id": "dalai-lama",
+      "name": "Далай-лама XIV",
+      "status": "active",
+      "avatar": "/images/mentors/dalai-lama.jpg",
+      "tagline": "Внутренний баланс",
+      "focus": "Смысл и энергия лидера",
+      "triggers": ["выгорание", "потеря мотивации", "зачем всё это?"],
+      "style": "Рефлективные вопросы, осознанность",
+      "description": "Поможет найти внутреннюю опору и смысл"
+    },
+    {
+      "id": "einstein",
+      "name": "Альберт Эйнштейн",
+      "status": "active",
+      "avatar": "/images/mentors/einstein.jpg",
+      "tagline": "Переопредели проблему",
+      "focus": "Латеральное мышление",
+      "triggers": ["все решения перепробованы", "сложная задача", "нужен прорыв"],
+      "style": "Парадоксы и смена системы координат",
+      "description": "Поможет взглянуть на проблему под новым углом"
+    },
+    {
+      "id": "bill-gates",
+      "name": "Билл Гейтс",
+      "status": "coming-soon",
+      "avatar": "/images/mentors/bill-gates.jpg",
+      "tagline": "Данные + Стратегия"
+    }
+  ]
+} 
