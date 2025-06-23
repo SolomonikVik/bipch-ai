@@ -2,7 +2,7 @@ export interface Mentor {
   id: string;
   name: string;
   status: 'active' | 'coming-soon';
-  avatar: string;
+  avatar?: string;
   tagline: string;
   focus?: string;
   triggers?: string[];
