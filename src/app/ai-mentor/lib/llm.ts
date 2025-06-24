@@ -1,47 +1,55 @@
 import OpenAI from 'openai'
 
-// Проверяем наличие API ключа
-if (!process.env.OPENAI_API_KEY) {
-  throw new Error('OPENAI_API_KEY не найден в environment variables')
-}
-
-// Создаем экземпляр OpenAI
-export const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-  timeout: 60000, // 60 секунд таймаут для GPT-4o
-})
-
-// Конфигурация для AI менторов
+// Конфигурация AI модели
 export const AI_CONFIG = {
-  model: 'gpt-4o' as const,
+  model: 'gpt-4o',
   maxInputTokens: 3000,
   maxOutputTokens: 2000,
   maxTotalTokens: 5000,
+  timeout: 60000,
   temperature: 0.7,
-  timeout: 60000
+} as const
+
+// Инициализация OpenAI клиента
+export const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+})
+
+// Проверка настроек
+if (!process.env.OPENAI_API_KEY) {
+  throw new Error('OPENAI_API_KEY не найден в переменных окружения')
 }
 
-// Типы для сообщений
+// Типы для API ответов
 export interface ChatMessage {
   role: 'system' | 'user' | 'assistant'
   content: string
 }
 
-// Функция для подсчета токенов (приблизительно)
-export function estimateTokens(text: string): number {
-  // Примерная оценка: 1 токен ≈ 4 символа для английского, 2-3 для русского
-  return Math.ceil(text.length / 3)
+export interface AIModelResponse {
+  content: string
+  usage?: {
+    prompt_tokens: number
+    completion_tokens: number
+    total_tokens: number
+  }
 }
 
-// Функция для проверки лимитов
-export function checkTokenLimits(input: string, output: string): boolean {
-  const inputTokens = estimateTokens(input)
-  const outputTokens = estimateTokens(output)
-  const totalTokens = inputTokens + outputTokens
+// Утилиты для работы с токенами
+export function estimateTokens(text: string): number {
+  // Примерная оценка: ~4 символа = 1 токен для русского текста
+  return Math.ceil(text.length / 4)
+}
 
-  return (
-    inputTokens <= AI_CONFIG.maxInputTokens &&
-    outputTokens <= AI_CONFIG.maxOutputTokens &&
-    totalTokens <= AI_CONFIG.maxTotalTokens
-  )
+export function validateTokenLimits(input: string): { isValid: boolean; error?: string } {
+  const inputTokens = estimateTokens(input)
+  
+  if (inputTokens > AI_CONFIG.maxInputTokens) {
+    return {
+      isValid: false,
+      error: `Слишком длинный текст. Максимум ${AI_CONFIG.maxInputTokens} токенов, у вас ${inputTokens}`
+    }
+  }
+  
+  return { isValid: true }
 } 

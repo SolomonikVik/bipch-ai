@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Mentor, Screen, ResultState, MockResponse } from '../types/mentor'
+import { generateResponse, AIResponse } from '../actions/generateResponse'
 import MentorGrid from './MentorGrid'
 import ProblemForm from './ProblemForm'
 import ResultBlock from './ResultBlock'
@@ -16,7 +17,7 @@ export default function ChatInterface({ mentors, mockResponses }: ChatInterfaceP
   const [selectedMentor, setSelectedMentor] = useState<Mentor | null>(null)
   const [problemText, setProblemText] = useState('')
   const [resultState, setResultState] = useState<ResultState>('idle')
-  const [currentResponse, setCurrentResponse] = useState<MockResponse | null>(null)
+  const [currentResponse, setCurrentResponse] = useState<AIResponse | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   const handleMentorSelect = (mentor: Mentor) => {
@@ -35,21 +36,30 @@ export default function ChatInterface({ mentors, mockResponses }: ChatInterfaceP
     setError(null)
 
     try {
-      // Симуляция загрузки 2 секунды
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      // Вызов реального AI через Server Action
+      const response = await generateResponse({
+        mentorId: selectedMentor.id,
+        problem: problemText
+      })
       
-      // Поиск мок ответа для выбранного ментора
-      const response = mockResponses.find(r => r.mentorId === selectedMentor.id)
+      setCurrentResponse(response)
+      setResultState('success')
       
-      if (response) {
-        setCurrentResponse(response)
+    } catch (error) {
+      console.error('AI response error:', error)
+      
+      // Fallback на мок ответы при ошибке AI
+      const mockResponse = mockResponses.find(r => r.mentorId === selectedMentor.id)
+      
+      if (mockResponse) {
+        setCurrentResponse(mockResponse)
         setResultState('success')
+        console.warn('Fallback к мок ответу из-за ошибки AI')
       } else {
-        throw new Error('Ответ ментора не найден')
+        const errorMessage = error instanceof Error ? error.message : 'Неизвестная ошибка'
+        setError(`Ошибка при генерации ответа: ${errorMessage}`)
+        setResultState('error')
       }
-    } catch {
-      setError('Произошла ошибка при генерации ответа. Попробуйте еще раз.')
-      setResultState('error')
     }
   }
 

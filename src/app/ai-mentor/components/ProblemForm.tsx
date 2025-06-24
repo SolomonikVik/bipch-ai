@@ -11,7 +11,7 @@ import { Mentor } from '../types/mentor'
 
 interface ProblemFormProps {
   mentor: Mentor
-  onSubmit: (problemText: string) => void
+  onSubmit: (problemText: string) => Promise<void>
   onChangeMentor: () => void
 }
 
@@ -51,7 +51,13 @@ export default function ProblemForm({ mentor, onSubmit, onChangeMentor }: Proble
     if (!problemText.trim() || problemText.length < 50) return
     
     setIsSubmitting(true)
-    onSubmit(problemText)
+    try {
+      await onSubmit(problemText)
+    } catch (error) {
+      console.error('Submit error:', error)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const characterCount = problemText.length
@@ -179,7 +185,7 @@ export default function ProblemForm({ mentor, onSubmit, onChangeMentor }: Proble
               size="lg"
               className="w-full text-base py-3"
             >
-              {isSubmitting ? 'Отправляем вопрос...' : 'Получить инсайт'}
+              {isSubmitting ? 'Ментор думает...' : 'Получить инсайт'}
             </Button>
           </div>
         </div>

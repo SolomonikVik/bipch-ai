@@ -1,7 +1,7 @@
 'use server'
 
 import { openai } from '@/app/ai-mentor/lib/llm'
-import { getMentorPrompt } from '@/app/ai-mentor/prompts/mentors'
+import { getMentorPromptWithFallback } from '@/app/ai-mentor/prompts/mentors'
 import { validateInput } from '@/app/ai-mentor/lib/validation'
 
 export interface GenerateResponseParams {
@@ -22,10 +22,10 @@ export async function generateResponse({ mentorId, problem }: GenerateResponsePa
       throw new Error(validation.error)
     }
 
-    // Получаем промпт ментора
-    const prompt = getMentorPrompt(mentorId)
+    // Получаем промпт ментора (с fallback на временные промпты)
+    const prompt = getMentorPromptWithFallback(mentorId)
     if (!prompt) {
-      throw new Error(`Ментор ${mentorId} не найден`)
+      throw new Error(`Ментор ${mentorId} не найден или недоступен`)
     }
 
     // Формируем сообщения для OpenAI
