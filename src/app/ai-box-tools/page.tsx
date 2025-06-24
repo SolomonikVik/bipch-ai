@@ -1,10 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
-import { Search, Grid, Brain, Image, Music, Video, Code, Package } from 'lucide-react'
+import { Search, Grid, Brain, Image, Music, Video, Code, Package, Home } from 'lucide-react'
 import ToolCard from '@/components/ToolCard'
 import { AITool, CATEGORIES } from '@/types/ai-tools'
 
@@ -51,9 +52,28 @@ export default function AIBoxToolsPage() {
     return <IconComponent className="w-4 h-4" />
   }
 
+  const NavigationHeader = () => (
+    <div className="bg-white border-b border-slate-200">
+      <div className="max-w-6xl mx-auto px-6 py-4">
+        <div className="flex items-center gap-2 text-lg">
+          <Link 
+            href="/" 
+            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
+          >
+            <Home className="w-5 h-5" />
+            <span className="font-medium">Главная</span>
+          </Link>
+          <span className="text-slate-400">/</span>
+          <span className="text-slate-700 font-medium">AI Tools Directory</span>
+        </div>
+      </div>
+    </div>
+  )
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background">
+        <NavigationHeader />
         <div className="container mx-auto px-4 py-16">
           <div className="text-center">
             <p className="text-muted-foreground">Загрузка...</p>
@@ -66,6 +86,7 @@ export default function AIBoxToolsPage() {
   if (error) {
     return (
       <div className="min-h-screen bg-background">
+        <NavigationHeader />
         <div className="container mx-auto px-4 py-16">
           <div className="text-center">
             <p className="text-red-600">Ошибка: {error}</p>
@@ -77,6 +98,7 @@ export default function AIBoxToolsPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <NavigationHeader />
       <div className="container mx-auto px-4 py-16">
         {/* Hero Section */}
         <div className="text-center mb-12">

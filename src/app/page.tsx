@@ -53,7 +53,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 
-                <Button asChild className="w-full group-hover:bg-indigo-600">
+                <Button asChild variant="outline" className="w-full transition-all duration-200 group-hover:bg-blue-50 group-hover:border-blue-200 group-hover:text-blue-700 hover:bg-blue-500 hover:border-blue-500 hover:text-white">
                   <Link href="/ai-mentor" className="flex items-center gap-2">
                     Попробовать AI Mentor
                     <ArrowRight className="w-4 h-4" />
@@ -91,7 +91,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 
-                <Button asChild variant="outline" className="w-full group-hover:bg-emerald-50">
+                <Button asChild variant="outline" className="w-full transition-all duration-200 group-hover:bg-blue-50 group-hover:border-blue-200 group-hover:text-blue-700 hover:bg-blue-500 hover:border-blue-500 hover:text-white">
                   <Link href="/ai-box-tools" className="flex items-center gap-2">
                     Посмотреть каталог
                     <ArrowRight className="w-4 h-4" />

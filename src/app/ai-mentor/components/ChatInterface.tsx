@@ -253,18 +253,6 @@ export default function ChatInterface({ mentors, mockResponses }: ChatInterfaceP
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* Header */}
-      <header className="bg-white border-b border-slate-200 h-20">
-        <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-semibold text-slate-900">AI Mentor</h1>
-          </div>
-          <div className="w-10 h-10 bg-slate-200 rounded-full flex items-center justify-center">
-            <span className="text-sm font-medium text-slate-600">?</span>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content */}
       <main className="pb-20">
         {currentScreen === 'mentor-selection' && (

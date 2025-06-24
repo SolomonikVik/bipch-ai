@@ -85,7 +85,7 @@ export default function ProblemForm({ mentor, onSubmit, onChangeMentor }: Proble
               onClick={onChangeMentor}
               className="text-slate-600 hover:text-slate-900"
             >
-              Изменить
+              Поменять ментора
             </Button>
           </div>
         </div>
@@ -121,69 +121,75 @@ export default function ProblemForm({ mentor, onSubmit, onChangeMentor }: Proble
                   {characterCount}/1000 символов {characterCount < 50 && '(минимум 50)'}
                 </span>
               </div>
+
+              {/* Helper Tips - перемещена ближе к полю ввода */}
+              <Collapsible open={isExpanded} onOpenChange={setIsExpanded}>
+                <CollapsibleTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-between p-3 h-auto text-left text-sm border border-slate-200 hover:bg-slate-50"
+                  >
+                    <div className="flex items-center gap-3">
+                      <HelpCircle className="w-4 h-4 text-indigo-500" />
+                      <span className="font-medium text-slate-700">Что описать для лучшего результата?</span>
+                    </div>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <Card className="mt-2">
+                    <CardContent className="pt-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div className="space-y-2">
+                          <div className="flex items-start gap-3">
+                            <span className="text-lg">📝</span>
+                            <div>
+                              <div className="font-medium text-slate-900">Контекст бизнеса</div>
+                              <div className="text-slate-600">Сфера, размер, команда</div>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <span className="text-lg">🎯</span>
+                            <div>
+                              <div className="font-medium text-slate-900">Конкретная проблема</div>
+                              <div className="text-slate-600">Что именно не работает</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <div className="flex items-start gap-3">
+                            <span className="text-lg">💡</span>
+                            <div>
+                              <div className="font-medium text-slate-900">Что уже пробовали</div>
+                              <div className="text-slate-600">Предыдущие попытки решения</div>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-3">
+                            <span className="text-lg">⚡</span>
+                            <div>
+                              <div className="font-medium text-slate-900">Желаемый результат</div>
+                              <div className="text-slate-600">К чему стремитесь</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </CollapsibleContent>
+              </Collapsible>
             </div>
 
-            {/* Helper Tips */}
-            <Collapsible open={isExpanded} onOpenChange={setIsExpanded}>
-              <CollapsibleTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  className="w-full justify-between p-4 h-auto text-left"
-                >
-                  <div className="flex items-center gap-3">
-                    <HelpCircle className="w-5 h-5 text-indigo-500" />
-                    <span className="font-medium">Что описать для лучшего результата?</span>
-                  </div>
-                  <ChevronDown className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
-                </Button>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <Card className="mt-4">
-                  <CardContent className="pt-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                      <div className="space-y-2">
-                        <div className="flex items-start gap-3">
-                          <span className="text-lg">📝</span>
-                          <div>
-                            <div className="font-medium text-slate-900">Контекст бизнеса</div>
-                            <div className="text-slate-600">Сфера, размер, команда</div>
-                          </div>
-                        </div>
-                        <div className="flex items-start gap-3">
-                          <span className="text-lg">🎯</span>
-                          <div>
-                            <div className="font-medium text-slate-900">Конкретная проблема</div>
-                            <div className="text-slate-600">Что именно не работает</div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="space-y-2">
-                        <div className="flex items-start gap-3">
-                          <span className="text-lg">💡</span>
-                          <div>
-                            <div className="font-medium text-slate-900">Что уже пробовали</div>
-                            <div className="text-slate-600">Предыдущие попытки решения</div>
-                          </div>
-                        </div>
-                        <div className="flex items-start gap-3">
-                          <span className="text-lg">⚡</span>
-                          <div>
-                            <div className="font-medium text-slate-900">Желаемый результат</div>
-                            <div className="text-slate-600">К чему стремитесь</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </CollapsibleContent>
-            </Collapsible>
+
 
             <Button 
               onClick={handleSubmit}
               disabled={!isValid || isSubmitting}
               size="lg"
-              className="w-full text-base py-3"
+              className={`w-full text-base py-3 transition-all duration-200 ${
+                isValid 
+                  ? 'bg-indigo-500 hover:bg-indigo-600 text-white shadow-md hover:shadow-lg' 
+                  : 'bg-slate-100 text-slate-400 cursor-not-allowed hover:bg-slate-100'
+              }`}
             >
               {isSubmitting ? 'Ментор анализирует...' : 'Получить уточняющие вопросы'}
             </Button>

@@ -1,5 +1,6 @@
 import { Mentor } from '../types/mentor'
 import MentorCard from './MentorCard'
+import { MessageCircle } from 'lucide-react'
 
 interface MentorGridProps {
   mentors: Mentor[]
@@ -9,14 +10,19 @@ interface MentorGridProps {
 export default function MentorGrid({ mentors, onMentorSelect }: MentorGridProps) {
   return (
     <div>
-      {/* Hero Section */}
-      <section className="py-16 lg:py-20">
+      {/* Hero Section - Компактная версия */}
+      <section className="py-8 lg:py-12">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-4xl lg:text-5xl font-semibold text-slate-900 mb-6 leading-tight">
-            Застряли? Спросите ментора.
-          </h1>
-          <p className="text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto">
-            AI-менторы помогут найти выход из тупика и план действий
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="p-2 bg-indigo-100 rounded-lg">
+              <MessageCircle className="w-6 h-6 text-indigo-600" />
+            </div>
+            <h1 className="text-3xl lg:text-4xl font-semibold text-slate-900">
+              Выберите ментора
+            </h1>
+          </div>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            Получите персональный совет от великих умов
           </p>
         </div>
       </section>

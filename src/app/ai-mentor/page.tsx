@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { Home } from 'lucide-react'
 import ChatInterface from './components/ChatInterface'
 import { Mentor, MockResponse } from './types/mentor'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -41,9 +43,28 @@ export default function AIMentorPage() {
     loadData()
   }, [])
 
+  const NavigationHeader = () => (
+    <div className="bg-white border-b border-slate-200">
+      <div className="max-w-6xl mx-auto px-6 py-4">
+        <div className="flex items-center gap-2 text-lg">
+          <Link 
+            href="/" 
+            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
+          >
+            <Home className="w-5 h-5" />
+            <span className="font-medium">Главная</span>
+          </Link>
+          <span className="text-slate-400">/</span>
+          <span className="text-slate-700 font-medium">AI Mentor</span>
+        </div>
+      </div>
+    </div>
+  )
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-slate-50">
+        <NavigationHeader />
         <div className="max-w-6xl mx-auto px-6 py-20">
           <div className="text-center mb-16">
             <Skeleton className="h-12 w-96 mx-auto mb-4" />
@@ -71,27 +92,33 @@ export default function AIMentorPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-semibold text-slate-900 mb-4">
-            Ошибка загрузки
-          </h1>
-          <p className="text-slate-600 mb-6">{error}</p>
-          <button 
-            onClick={() => window.location.reload()}
-            className="px-6 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors"
-          >
-            Попробовать снова
-          </button>
+      <div className="min-h-screen bg-slate-50">
+        <NavigationHeader />
+        <div className="flex items-center justify-center" style={{ minHeight: 'calc(100vh - 73px)' }}>
+          <div className="text-center">
+            <h1 className="text-2xl font-semibold text-slate-900 mb-4">
+              Ошибка загрузки
+            </h1>
+            <p className="text-slate-600 mb-6">{error}</p>
+            <button 
+              onClick={() => window.location.reload()}
+              className="px-6 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors"
+            >
+              Попробовать снова
+            </button>
+          </div>
         </div>
       </div>
     )
   }
 
   return (
-    <ChatInterface 
-      mentors={mentors} 
-      mockResponses={mockResponses}
-    />
+    <div className="min-h-screen bg-slate-50">
+      <NavigationHeader />
+      <ChatInterface 
+        mentors={mentors} 
+        mockResponses={mockResponses}
+      />
+    </div>
   )
 } 

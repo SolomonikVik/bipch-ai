@@ -62,7 +62,7 @@ export default function ToolCard({ tool }: ToolCardProps) {
   const pricingInfo = getPricingDisplay(tool.pricing, tool.priceFrom)
 
   return (
-    <Card className="h-full flex flex-col transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5">
+    <Card className="h-full flex flex-col transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 group">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3">
@@ -113,7 +113,7 @@ export default function ToolCard({ tool }: ToolCardProps) {
         
         <Button 
           variant="outline" 
-          className="w-full mt-auto"
+          className="w-full mt-auto transition-all duration-200 group-hover:bg-blue-50 group-hover:border-blue-200 group-hover:text-blue-700 hover:bg-blue-500 hover:border-blue-500 hover:text-white"
           asChild
         >
           <a 
