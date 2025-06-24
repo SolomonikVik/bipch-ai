@@ -1,6 +1,6 @@
 'use server'
 
-import { openai } from '@/app/ai-mentor/lib/llm'
+import { openai, AI_CONFIG } from '@/app/ai-mentor/lib/llm'
 import { getSystemPrompt, getUserPrompt } from '@/app/ai-mentor/prompts/mentors'
 import { validateInput } from '@/app/ai-mentor/lib/validation'
 import { 
@@ -48,7 +48,7 @@ export async function generateClarification({ mentorId, problem }: GenerateRespo
 
     // Вызываем OpenAI API
     const response = await openai.chat.completions.create({
-      model: 'gpt-4o',
+      model: AI_CONFIG.model,
       messages,
       max_tokens: 1500,
       temperature: 0.7,
@@ -160,7 +160,7 @@ export async function generateSolution({ mentorId, problem, userAnswers }: Gener
 
     // Вызываем OpenAI API
     const response = await openai.chat.completions.create({
-      model: 'gpt-4o',
+      model: AI_CONFIG.model,
       messages,
       max_tokens: 2000,
       temperature: 0.7,

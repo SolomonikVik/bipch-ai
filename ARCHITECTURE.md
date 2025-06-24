@@ -267,8 +267,8 @@ npm run build
 ### Environment Variables (Vercel)
 ```bash
 # AI-Mentor OpenAI интеграция
-OPENAI_API_KEY=sk-...       # OpenAI API ключ
-OPENAI_MODEL=gpt-4o         # Модель GPT-4o
+OPENAI_API_KEY=sk-...       # OpenAI API ключ (обязательно)
+# Модель gpt-4o жестко прописана в коде
 ```
 
 ### Secrets & Environment
