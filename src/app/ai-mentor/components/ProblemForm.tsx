@@ -100,7 +100,7 @@ export default function ProblemForm({ mentor, onSubmit, onChangeMentor }: Proble
                 Опишите вашу ситуацию
               </h2>
               <p className="text-slate-600">
-                Чем подробнее вы опишете проблему, тем точнее будет совет
+                Ментор задаст уточняющие вопросы для более точного решения
               </p>
             </div>
 
@@ -185,7 +185,7 @@ export default function ProblemForm({ mentor, onSubmit, onChangeMentor }: Proble
               size="lg"
               className="w-full text-base py-3"
             >
-              {isSubmitting ? 'Ментор думает...' : 'Получить инсайт'}
+              {isSubmitting ? 'Ментор анализирует...' : 'Получить уточняющие вопросы'}
             </Button>
           </div>
         </div>
